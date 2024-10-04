@@ -1,13 +1,35 @@
 import "./App.css";
-
 import DisplayEmployees from "./components/displayEmployees";
-import { useState } from "react";
-import useLocalStorage from "./components/useLocalStorage";
+import { useEffect, useState } from "react";
 import Sidebar from "./components/sidebar";
 
 function App() {
-  const [employees, setEmployees] = useLocalStorage("employees", []);
-  const [count, setCount] = useState(0);
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
+  async function fetchEmployees() {
+    try {
+      const response = await fetch("http://localhost:8000/employees", {
+        method: "GET",
+      });
+
+      if (response.ok) {
+        let data = await response.json();
+        // data = data.map((obj) => {
+        //   return { ...obj, edit: false };
+        // });
+        setEmployees(data);
+      } else {
+        // Handle error
+      }
+    } catch (error) {
+      // Handle error
+      console.log(error);
+    }
+  }
 
   function handleAddEmployees(obj) {
     //find employee
@@ -29,47 +51,78 @@ function App() {
     }
   }
 
-  function handleDeleteEmployee(id) {
+  async function handleDeleteEmployee(id) {
     let deleteConfirmation = window.confirm(
       "Are you sure you want to delete employee?"
     );
     if (deleteConfirmation) {
-      const filteredEmployees = employees.filter(
-        (employee) => employee.id !== id
-      );
-      alert("Employee has been deleted");
-      setEmployees(filteredEmployees);
+      try {
+        const response = await fetch(`http://localhost:8000/employees/${id}`, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          alert(data.message);
+        } else {
+          // Handle error
+        }
+      } catch (error) {
+        // Handle error
+        console.log(error);
+      }
     }
   }
 
   function handleUpdate(id) {
     const employeesCopy = employees.slice(0);
-    let employee = employeesCopy.find((employee) => employee.id === id);
+    let employee = employeesCopy.find((employee) => employee.docId === id);
     employee.edit = true;
     setEmployees(employeesCopy);
   }
 
-  function handleResubmit(id, obj) {
+  async function handleResubmit(id, obj) {
     if (obj) {
       let updateConfirmation = window.confirm(
         "You are about to update employee information. Continue?"
       );
       if (updateConfirmation) {
         const employeesCopy = employees.slice(0);
-        let employee = employeesCopy.find((employee) => employee.id === id);
-        employee.name = obj.name ? obj.name : employee.name;
-        employee.surname = obj.surname ? obj.surname : employee.surname;
-        employee.id = obj.id ? obj.id : employee.id;
-        employee.position = obj.position ? obj.position : employee.position;
-        employee.department = obj.department
-          ? obj.department
-          : employee.department;
-        employee.email = obj.email ? obj.email : employee.email;
-        employee.phone = obj.phone ? obj.phone : employee.phone;
-        employee.date = obj.date ? obj.date : employee.date;
-        employee.pic = obj.pic ? obj.pic : employee.pic;
+        let employee = employeesCopy.find((employee) => employee.docId === id);
 
+        const formData = new FormData();
+
+        formData.append("name", obj.name);
+        formData.append("surname", obj.surname);
+        formData.append("id", obj.id);
+        formData.append("email", obj.email);
+        formData.append("department", obj.department);
+        formData.append("position", obj.position);
+        formData.append("phone", obj.phone);
+        formData.append("date", obj.date);
+        formData.append("pic", obj.pic);
+
+        try {
+          const response = await fetch(
+            `http://localhost:8000/employees/${id}`,
+            {
+              method: "PUT",
+              body: formData,
+            }
+          );
+
+          if (response.ok) {
+            const data = await response.json();
+            alert(data.message);
+          } else {
+            // Handle error
+          }
+        } catch (error) {
+          // Handle error
+          console.log(error);
+        }
         employee.edit = false;
+        setEmployees(employeesCopy);
 
         if (
           !obj.name &&
@@ -83,15 +136,13 @@ function App() {
           !obj.pic
         ) {
           alert("Error! No update information was entered!");
-        } else {
-          alert("Employee has been updated");
         }
 
         setEmployees(employeesCopy);
       }
     } else {
       const employeesCopy = employees.slice(0);
-      let employee = employeesCopy.find((employee) => employee.id === id);
+      let employee = employeesCopy.find((employee) => employee.docId === id);
       employee.edit = false;
       setEmployees(employeesCopy);
     }

@@ -40,15 +40,7 @@ function Employee({
   }
 
   function handleImageUpload(e) {
-    let input = document.getElementById("profile-pic2");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-
-    fReader.onloadend = function (event) {
-      setObj({ ...obj, pic: event.target.result });
-    };
-    /*let url = URL.createObjectURL(e.target.files[0]);
-    obj.pic = url;*/
+    setObj((prev) => ({ ...prev, pic: e.target.files[0] }));
   }
   function handleEmployeeUpdate() {
     handleResubmit(id, obj);
@@ -65,7 +57,7 @@ function Employee({
       edit: false,
     });
   }
-
+  console.log(pic);
   return (
     <div>
       {edit === true ? (
@@ -175,7 +167,7 @@ function Employee({
       ) : (
         <div className="Employee">
           <div className="profile-name">
-            <div className="profile-pic">{pic && <img src={pic} />}</div>
+            <div className="profile-pic">{pic && <img src={pic[0]} />}</div>
             <div className="name">
               <div className="fname-sname">{name + " " + surname}</div>
               <div className="position">{position}</div>

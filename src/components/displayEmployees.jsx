@@ -97,8 +97,8 @@ function DisplayEmployees({
 
       <ul className="employees-display">
         {searchResults.length !== 0
-          ? searchResults.map((employee) => (
-              <li key={employee.id}>
+          ? searchResults.map((employee, i) => (
+              <li key={i}>
                 <Employee
                   edit={employee.edit}
                   name={employee.name}
@@ -116,8 +116,8 @@ function DisplayEmployees({
                 />
               </li>
             ))
-          : employees.map((employee) => (
-              <li key={employee.id}>
+          : employees.map((employee, i) => (
+              <li key={i}>
                 <Employee
                   edit={employee.edit}
                   name={employee.name}
@@ -128,7 +128,7 @@ function DisplayEmployees({
                   phone={employee.phone}
                   pic={employee.pic}
                   date={employee.date}
-                  id={employee.id}
+                  id={employee.docId}
                   handleDeleteEmployee={handleDeleteEmployee}
                   handleUpdate={handleUpdate}
                   handleResubmit={handleResubmit}

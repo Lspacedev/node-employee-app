@@ -20,19 +20,39 @@ function Form({ handleAddEmployees, toggleClicked }) {
   }
 
   function handleImageUpload(e) {
-    let input = document.getElementById("profile-pic");
-    var fReader = new FileReader();
-    fReader.readAsDataURL(input.files[0]);
-    fReader.onloadend = function (event) {
-      obj.pic = event.target.result;
-    };
-    /*let url = URL.createObjectURL(e.target.files[0]);
-    obj.pic = url;*/
+    setObj((prev) => ({ ...prev, pic: e.target.files[0] }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    handleAddEmployees(obj);
+
+    const formData = new FormData();
+    formData.append("name", obj.name);
+    formData.append("surname", obj.surname);
+    formData.append("id", obj.id);
+    formData.append("email", obj.email);
+    formData.append("department", obj.department);
+    formData.append("position", obj.position);
+    formData.append("phone", obj.phone);
+    formData.append("date", obj.date);
+    formData.append("pic", obj.pic);
+
+    try {
+      const response = await fetch("http://localhost:8000/employees", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert(data.message);
+      } else {
+        // Handle error
+      }
+    } catch (error) {
+      // Handle error
+      console.log(error);
+    }
     toggleClicked();
   }
 
