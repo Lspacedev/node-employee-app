@@ -5,6 +5,7 @@ import Sidebar from "./components/sidebar";
 
 function App() {
   const [employees, setEmployees] = useState([]);
+  const [err, setErr] = useState("");
 
   useEffect(() => {
     fetchEmployees();
@@ -27,7 +28,7 @@ function App() {
       }
     } catch (error) {
       // Handle error
-      console.log(error);
+      setErr(error.message);
     }
   }
 
@@ -119,7 +120,7 @@ function App() {
           }
         } catch (error) {
           // Handle error
-          console.log(error);
+          setErr(err.message);
         }
         employee.edit = false;
         setEmployees(employeesCopy);
@@ -147,7 +148,7 @@ function App() {
       setEmployees(employeesCopy);
     }
   }
-
+  if (err !== "") return <div className="err">{err}</div>;
   return (
     <div className="App">
       <Sidebar />
