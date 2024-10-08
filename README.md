@@ -15,5 +15,5 @@ npm install
 ```python
 Run project
 
-npm run start
+npm run dev
 ```
