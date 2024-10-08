@@ -1,8 +1,19 @@
-# React + Vite
+# Node - React | Employee App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React employee management app, with node express backend, using firebase as a database.
 
-Currently, two official plugins are available:
+## Installation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Start project by installing dependencies
+
+```bash
+npm install
+```
+
+## Usage
+
+```python
+Run project
+
+npm run start
+```
