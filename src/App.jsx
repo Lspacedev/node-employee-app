@@ -6,6 +6,7 @@ import Sidebar from "./components/sidebar";
 function App() {
   const [employees, setEmployees] = useState([]);
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchEmployees();
@@ -23,6 +24,7 @@ function App() {
         //   return { ...obj, edit: false };
         // });
         setEmployees(data);
+        setLoading(false);
       } else {
         // Handle error
       }
@@ -148,6 +150,7 @@ function App() {
       setEmployees(employeesCopy);
     }
   }
+  if (loading === true) return <div className="loading">Loading...</div>;
   if (err !== "") return <div className="err">{err}</div>;
   return (
     <div className="App">
