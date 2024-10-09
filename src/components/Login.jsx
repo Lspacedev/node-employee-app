@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
-
+import Cookies from "js-cookie";
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,22 +14,28 @@ function AdminLogin() {
         return user.getIdToken().then((idToken) => {
           return fetch("http://localhost:8000/login", {
             method: "POST",
+            credentials: "include",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+              //"CSRF-Token": Cookies.get("XSRF-TOKEN"),
             },
             body: JSON.stringify({ idToken }),
           });
         });
       })
-      .then(() => {
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (data.status === "success") {
+          localStorage.setItem("auth", true);
+        }
         // A page redirect would suffice as the persistence is set to NONE.
-        return firebase.auth().signOut();
+        return auth.signOut();
       })
       .then(() => {
         alert("Log in successfully");
-        // navigation("/home");
+        navigation("/home");
         //window.location.assign("/profile");
       });
   }

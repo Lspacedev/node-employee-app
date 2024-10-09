@@ -57,7 +57,7 @@ function Employee({
       edit: false,
     });
   }
-  console.log(pic);
+
   return (
     <div>
       {edit === true ? (
