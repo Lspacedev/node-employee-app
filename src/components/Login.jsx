@@ -7,7 +7,15 @@ function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigate();
-
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    await fetch("http://localhost:8000/csrf", {
+      method: "GET",
+      credentials: "include",
+    });
+  }
   function login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
@@ -18,7 +26,7 @@ function AdminLogin() {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              //"CSRF-Token": Cookies.get("XSRF-TOKEN"),
+              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
             },
             body: JSON.stringify({ idToken }),
           });
@@ -42,9 +50,6 @@ function AdminLogin() {
 
   return (
     <div className="Login">
-      <div className="login-img">
-        {/* <img src="images/login-register.jpg" alt="login" /> */}
-      </div>
       <div className="login-form-container">
         <h2>Employee Manager | Admin</h2>
         <p>Log in to your admin account.</p>

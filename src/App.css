@@ -12,6 +12,54 @@ body,
   justify-content: center;
   align-items: center;
 }
+.Login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Login .form input {
+  width: 98%;
+}
+.Login .form .submit-btn {
+  width: 100%;
+}
+.Register {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Register .form input {
+  width: 98%;
+}
+.Register .form .submit-btn {
+  width: 100%;
+}
+.login-link {
+  cursor: pointer;
+  text-decoration: underline;
+  color: #05182b;
+}
+.ProfileIcon p {
+  cursor: pointer;
+}
+.Admin {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Admin input,
+button {
+  width: 98%;
+}
+.Admin button {
+  width: 100%;
+}
 .Home {
   min-height: 100vh;
   text-align: center;

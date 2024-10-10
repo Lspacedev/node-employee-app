@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Image } from "react";
-function Form({ handleAddEmployees, toggleClicked }) {
+import Cookies from "js-cookie";
+
+function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
     id: "",
     name: "",
@@ -40,6 +42,10 @@ function Form({ handleAddEmployees, toggleClicked }) {
     try {
       const response = await fetch("http://localhost:8000/employees", {
         method: "POST",
+        credentials: "include",
+        headers: {
+          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+        },
         body: formData,
       });
 

@@ -6,10 +6,12 @@ import AddEmployee from "./addEmployee";
 import ProfileIcon from "./profileIcon";
 import SeachBar from "./searchBar";
 import { useNavigate, Link } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function DisplayEmployees() {
   const [employees, setEmployees] = useState([]);
   const [err, setErr] = useState("");
+  const [data, setData] = useState("");
   const navigation = useNavigate();
 
   const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ function DisplayEmployees() {
   const [searchResults, setSearchResults] = useState([]);
   useEffect(() => {
     fetchEmployees();
-  }, []);
+  }, [data]);
 
   async function fetchEmployees() {
     try {
@@ -42,7 +44,7 @@ function DisplayEmployees() {
         method: "GET",
         credentials: "include",
       });
-      console.log(response);
+
       if (response.redirected === true) {
         navigation("/");
         localStorage.clear();
@@ -127,10 +129,16 @@ function DisplayEmployees() {
       try {
         const response = await fetch(`http://localhost:8000/employees/${id}`, {
           method: "DELETE",
+          credentials: "include",
+          headers: {
+            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          },
         });
 
         if (response.ok) {
           const data = await response.json();
+          setData(data);
+
           alert(data.message);
         } else {
           // Handle error
@@ -175,12 +183,17 @@ function DisplayEmployees() {
             `http://localhost:8000/employees/${id}`,
             {
               method: "PUT",
+              credentials: "include",
+              headers: {
+                "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+              },
               body: formData,
             }
           );
 
           if (response.ok) {
             const data = await response.json();
+            setData(data);
             alert(data.message);
           } else {
             // Handle error
@@ -215,7 +228,7 @@ function DisplayEmployees() {
       setEmployees(employeesCopy);
     }
   }
-  // if (loading === true) return <div className="loading">Loading...</div>;
+  if (loading === true) return <div className="loading">Loading...</div>;
   if (err !== "") return <div className="err">{err}</div>;
   return (
     <div className="Display">
