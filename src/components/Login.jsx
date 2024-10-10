@@ -11,7 +11,7 @@ function AdminLogin() {
     getCsrf();
   }, []);
   async function getCsrf() {
-    await fetch("http://localhost:8000/csrf", {
+    await fetch("http://localhost:8000", {
       method: "GET",
       credentials: "include",
     });
