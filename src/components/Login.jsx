@@ -55,33 +55,35 @@ function AdminLogin() {
         <p>Log in to your admin account.</p>
         <div className="form">
           <div className="email">
-            <label htmlFor="email">
-              Email:
-              <input
-                type="email"
-                id="email"
-                name="email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
+            <label htmlFor="email">Email: </label>
+            <br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
 
           <div className="password">
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                id="password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
+            <label htmlFor="password">Password: </label>
+            <br />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-
+          <br />
           <button className="submit-btn" onClick={login}>
             Login
           </button>
         </div>
+      </div>
+      <div className="showcase">
+        <h2>An easy way to manage employees.</h2>
+        <img src="./images/6861232.jpg" />
       </div>
     </div>
   );

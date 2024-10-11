@@ -73,8 +73,8 @@ function Form({ toggleClicked }) {
           x
         </div>
         <form>
-          <h3>Enter employee information</h3>
-
+          <h5>Enter employee information</h5>
+          <br />
           <div className="name-surname">
             <label htmlFor="fname">
               Name:
@@ -178,7 +178,7 @@ function Form({ toggleClicked }) {
               />
             </label>
           </div>
-
+          <br />
           <input
             type="submit"
             value="Submit"

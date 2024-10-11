@@ -11,7 +11,7 @@ function AddEmployee({ count, handleAddEmployees }) {
   return (
     <div className="Add">
       <div className="Add-div">
-        <button onClick={toggleClicked}>+ New Employee</button>
+        <div onClick={toggleClicked}>Add Employee</div>
       </div>
       {clicked && (
         <Form

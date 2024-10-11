@@ -46,7 +46,6 @@ function Admin() {
         },
         body: JSON.stringify({ email, password }),
       });
-      console.log(response);
       if (response.redirected === true) {
         navigation("/");
         localStorage.clear();
@@ -65,9 +64,11 @@ function Admin() {
   }
   return (
     <div className="Admin">
-      <h3>Admins</h3>
-      <h4>Add Admin</h4>
+      <div className="back-arrow" onClick={() => navigation("/home")}>
+        back
+      </div>
       <div className="admin-form">
+        <h4>Add Admin</h4>
         Email:{" "}
         <input
           type="email"
@@ -81,7 +82,13 @@ function Admin() {
           name="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={addAdmin}>add</button>
+        <br />
+        <br />
+        <button onClick={addAdmin}>Add</button>
+      </div>
+      <div className="admins">
+        <h3>Admins</h3>
+        <p>admin@doe.com</p>
       </div>
     </div>
   );

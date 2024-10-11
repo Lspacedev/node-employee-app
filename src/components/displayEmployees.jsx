@@ -52,9 +52,6 @@ function DisplayEmployees() {
       }
       if (response.ok) {
         let data = await response.json();
-        // data = data.map((obj) => {
-        //   return { ...obj, edit: false };
-        // });
         setEmployees(data);
         setLoading(false);
       } else {
