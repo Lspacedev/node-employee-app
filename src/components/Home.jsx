@@ -3,11 +3,12 @@ import DisplayEmployees from "./displayEmployees";
 function Home() {
   return (
     <div className="Home">
-      <Sidebar />
+      Home
+      {/* <Sidebar />
 
       <div className="Main">
         <DisplayEmployees />
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -11,7 +11,7 @@ function AdminLogin() {
     getCsrf();
   }, []);
   async function getCsrf() {
-    await fetch("http://localhost:8000", {
+    await fetch("http://localhost:8000/", {
       method: "GET",
       credentials: "include",
     });
@@ -81,10 +81,10 @@ function AdminLogin() {
           </button>
         </div>
       </div>
-      <div className="showcase">
+      {/* <div className="showcase">
         <h2>An easy way to manage employees.</h2>
         <img src="./images/6861232.jpg" />
-      </div>
+      </div> */}
     </div>
   );
 }
