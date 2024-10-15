@@ -4,6 +4,8 @@ import Cookies from "js-cookie";
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
+
   const navigation = useNavigate();
   useEffect(() => {
     getCsrf();
@@ -34,7 +36,7 @@ function Register() {
       }
     } catch (error) {
       // Handle error
-      console.log(error);
+      setErr(error);
     }
   }
   function goLogin() {
@@ -53,6 +55,7 @@ function Register() {
             login
           </span>
         </p>
+        {err !== "" && <p className="err-msg">{err}</p>}
         <div className="form">
           <div className="email">
             <label htmlFor="email">

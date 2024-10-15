@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
   const navigation = useNavigate();
   useEffect(() => {
     getCsrf();
@@ -45,7 +46,8 @@ function AdminLogin() {
         alert("Log in successfully");
         navigation("/home");
         //window.location.assign("/profile");
-      });
+      })
+      .catch((err) => setErr(err.message));
   }
   function goRegister() {
     navigation("/register");
@@ -57,6 +59,7 @@ function AdminLogin() {
 
         <h2>Welcome Back</h2>
         <p>Please enter your details.</p>
+        {err !== "" && <p className="err-msg">{err}</p>}
         <div className="form">
           <div className="email">
             <label htmlFor="email">Email: </label>

@@ -17,6 +17,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+.err-msg {
+  color: rgb(155, 5, 5);
+  font-size: 0.8rem;
+}
 .Register {
   height: 100vh;
   display: flex;

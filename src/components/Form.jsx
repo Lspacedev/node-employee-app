@@ -57,7 +57,7 @@ function Form({ toggleClicked }) {
       }
     } catch (error) {
       // Handle error
-      console.log(error);
+      alert(error.message);
     }
     toggleClicked();
   }

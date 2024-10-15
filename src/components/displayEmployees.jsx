@@ -142,7 +142,7 @@ function DisplayEmployees() {
         }
       } catch (error) {
         // Handle error
-        console.log(error);
+        setErr(error.message);
       }
     }
   }
@@ -197,7 +197,7 @@ function DisplayEmployees() {
           }
         } catch (error) {
           // Handle error
-          setErr(err.message);
+          setErr(error.message);
         }
         employee.edit = false;
         setEmployees(employeesCopy);
