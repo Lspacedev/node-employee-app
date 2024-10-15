@@ -9,7 +9,7 @@ function Register() {
     getCsrf();
   }, []);
   async function getCsrf() {
-    await fetch("http://localhost:8000/csrf", {
+    await fetch("http://localhost:8000/", {
       method: "GET",
       credentials: "include",
     });
@@ -44,8 +44,9 @@ function Register() {
   return (
     <div className="Register">
       <div className="register-form-container">
-        <h2>Employee Manager | Admin</h2>
-        <p>Register your admin account.</p>
+        <img src="./images/icon.png" />
+        <h2>Create an account</h2>
+
         <p>
           Already have an account{" "}
           <span className="login-link" onClick={goLogin}>
@@ -76,11 +77,15 @@ function Register() {
               />
             </label>
           </div>
-
+          <br />
           <button className="submit-btn" onClick={register}>
             Register
           </button>
         </div>
+      </div>
+      <div className="showcase">
+        <h2>An easy way to manage employees.</h2>
+        <img src="./images/6861232.jpg" />
       </div>
     </div>
   );

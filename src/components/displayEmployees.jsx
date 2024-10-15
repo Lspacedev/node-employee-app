@@ -241,7 +241,7 @@ function DisplayEmployees() {
         </div>
         <div className="count-add">
           <div className="employee-count">
-            <div>{employees.length}</div> <p> employees</p>
+            <div>{employees.length}</div> <p> Employees</p>
           </div>
 
           <AddEmployee

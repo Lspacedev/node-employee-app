@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { RiAdminFill } from "react-icons/ri";
 
 function ProfileIcon() {
   const navigation = useNavigate();
@@ -8,7 +9,9 @@ function ProfileIcon() {
   }
   return (
     <div className="ProfileIcon">
-      <p onClick={navigateAdmin}>Admin</p>
+      <p onClick={navigateAdmin}>
+        <RiAdminFill className="icon" /> | <i>Admin</i>
+      </p>
     </div>
   );
 }

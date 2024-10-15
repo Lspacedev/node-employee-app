@@ -47,12 +47,16 @@ function AdminLogin() {
         //window.location.assign("/profile");
       });
   }
-
+  function goRegister() {
+    navigation("/register");
+  }
   return (
     <div className="Login">
       <div className="login-form-container">
-        <h2>Employee Manager | Admin</h2>
-        <p>Log in to your admin account.</p>
+        <img src="./images/icon.png" />
+
+        <h2>Welcome Back</h2>
+        <p>Please enter your details.</p>
         <div className="form">
           <div className="email">
             <label htmlFor="email">Email: </label>
@@ -79,12 +83,18 @@ function AdminLogin() {
           <button className="submit-btn" onClick={login}>
             Login
           </button>
+          <div>
+            Don't have an account?{" "}
+            <span className="register-link" onClick={goRegister}>
+              Register
+            </span>
+          </div>
         </div>
       </div>
-      {/* <div className="showcase">
+      <div className="showcase">
         <h2>An easy way to manage employees.</h2>
         <img src="./images/6861232.jpg" />
-      </div> */}
+      </div>
     </div>
   );
 }

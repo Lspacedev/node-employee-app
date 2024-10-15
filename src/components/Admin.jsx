@@ -1,17 +1,19 @@
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoArrowBack } from "react-icons/io5";
 
 function Admin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [admins, setAdmins] = useState([]);
   const navigation = useNavigate();
   useEffect(() => {
-    checkSession();
+    fetchAdmins();
   }, []);
-  async function checkSession() {
+  async function fetchAdmins() {
     try {
-      const response = await fetch("http://localhost:8000/checkSession", {
+      const response = await fetch("http://localhost:8000/admins", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -23,6 +25,13 @@ function Admin() {
         navigation("/");
         localStorage.clear();
         return;
+      }
+      if (response.ok) {
+        let data = await response.json();
+        setAdmins(data);
+        //setLoading(false);
+      } else {
+        // Handle error
       }
     } catch (error) {
       // Handle error
@@ -65,7 +74,7 @@ function Admin() {
   return (
     <div className="Admin">
       <div className="back-arrow" onClick={() => navigation("/home")}>
-        back
+        <IoArrowBack />
       </div>
       <div className="admin-form">
         <h4>Add Admin</h4>
@@ -88,7 +97,9 @@ function Admin() {
       </div>
       <div className="admins">
         <h3>Admins</h3>
-        <p>admin@doe.com</p>
+        <ul>
+          {admins && admins.map((admin, i) => <li key={i}>{admin.email}</li>)}
+        </ul>
       </div>
     </div>
   );

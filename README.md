@@ -17,3 +17,9 @@ Run project
 
 npm run dev
 ```
+
+## Photo credits
+
+```python
+<a href="https://www.freepik.com/icon/team_8972646#fromView=search&page=1&position=51&uuid=5cfb955a-55f4-452b-a5f1-d7e6b0e70d20">Icon by bsd</a>
+```
