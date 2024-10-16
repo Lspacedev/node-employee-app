@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cookies from "js-cookie";
 import Admin from "./components/Admin";
 import Register from "./components/Register";
+import Landing from "./components/Landing";
 
 function App() {
   const [session, setSession] = useState();
@@ -17,7 +18,9 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<Login />} />
+          <Route exact path="/" element={<Landing />} />
+
+          <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
 
           <Route element={<ProtectedRoutes />}>

@@ -73,33 +73,43 @@ function Admin() {
   }
   return (
     <div className="Admin">
-      <div className="back-arrow" onClick={() => navigation("/home")}>
-        <IoArrowBack />
+      <div className="admin-header">
+        <div className="back-arrow" onClick={() => navigation("/home")}>
+          <IoArrowBack />
+        </div>
+        <div className="logo">
+          <img src="./images/icon.png" />
+          <div>
+            Employee<i>Manager</i>
+          </div>
+        </div>
       </div>
-      <div className="admin-form">
-        <h4>Add Admin</h4>
-        Email:{" "}
-        <input
-          type="email"
-          name="email"
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        Password:{" "}
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <br />
-        <button onClick={addAdmin}>Add</button>
-      </div>
-      <div className="admins">
-        <h3>Admins</h3>
-        <ul>
-          {admins && admins.map((admin, i) => <li key={i}>{admin.email}</li>)}
-        </ul>
+      <div className="admin-content">
+        <div className="admin-form">
+          <h4>Add Admin</h4>
+          Email:{" "}
+          <input
+            type="email"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+          Password:{" "}
+          <input
+            type="password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+          <br />
+          <button onClick={addAdmin}>Add</button>
+        </div>
+        <div className="admins">
+          <h3>Admins:</h3>
+          <ul>
+            {admins && admins.map((admin, i) => <li key={i}>{admin.email}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   );

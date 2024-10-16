@@ -76,7 +76,7 @@ function DisplayEmployees() {
           employee.department
             .toLowerCase()
             .match(submittedSearch.toLowerCase()) ||
-          employee.id.toString().match(submittedSearch) ||
+          employee.docId.toString().match(submittedSearch) ||
           employee.phone.toString().match(submittedSearch.toString()) ||
           employee.email.match(submittedSearch) ||
           employee.date.toLowerCase().match(submittedSearch.toLowerCase())
@@ -266,7 +266,7 @@ function DisplayEmployees() {
                   phone={employee.phone}
                   pic={employee.pic}
                   date={employee.date}
-                  id={employee.id}
+                  id={employee.docId}
                   handleDeleteEmployee={handleDeleteEmployee}
                   handleUpdate={handleUpdate}
                   handleResubmit={handleResubmit}

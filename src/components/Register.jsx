@@ -40,7 +40,7 @@ function Register() {
     }
   }
   function goLogin() {
-    navigation("/");
+    navigation("/login");
   }
 
   return (

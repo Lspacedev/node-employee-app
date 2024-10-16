@@ -11,6 +11,11 @@ body {
 
 * {
   font-family: "Poppins", sans-serif;
+  /* border: 1px solid black; */
+}
+
+.App {
+  height: 100vh;
 }
 .err {
   display: flex;
@@ -21,6 +26,97 @@ body {
   color: rgb(155, 5, 5);
   font-size: 0.8rem;
 }
+.Nav {
+  background-color: #1a1a1a;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 70px;
+}
+.nav-logo {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: whitesmoke;
+
+  padding: 20px 0px;
+  display: flex;
+}
+.nav-logo i {
+  color: #fe9000;
+}
+.nav-logo img {
+  width: 30px;
+  filter: invert(30%) sepia(72%) saturate(3433%) hue-rotate(11deg)
+    brightness(100%) contrast(102%);
+  border-radius: 10px;
+}
+.register-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.login-btn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: white;
+}
+.register-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid white;
+  color: white;
+  background-color: transparent;
+}
+.login-btn:hover {
+  background-color: #eb4a00;
+  color: white;
+  cursor: pointer;
+}
+.register-btn:hover {
+  background-color: #eb4a00;
+  border: 1px solid #111111;
+  cursor: pointer;
+}
+.Showcase {
+  height: calc(100vh - 71px);
+  display: flex;
+  align-items: center;
+  padding: 0px 70px;
+  background-color: #111111;
+}
+.Showcase button {
+  background-color: #e06500;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+}
+.Showcase button:hover {
+  background-color: #eb4a00;
+  cursor: pointer;
+}
+.Showcase div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: bold;
+
+  color: white;
+  text-align: center;
+  padding: 0px 25px 15px 0px;
+  /* background-color: rgb(245, 242, 242); */
+}
+.Showcase img {
+  width: 50%;
+  height: 70%;
+  border-radius: 25px;
+  opacity: 0.8;
+}
+
 .Register {
   height: 100vh;
   display: flex;
@@ -150,14 +246,43 @@ body {
 }
 
 .Admin {
-  height: 100vh;
-  padding: 50px 200px;
+  height: inherit;
+  width: calc(inherit - 50px);
+  padding: 0px 50px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   background-color: whitesmoke;
 }
+.admin-header {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: start;
+  justify-content: center;
+  gap: 50px;
+}
+.admin-content {
+  height: inherit;
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  background-color: whitesmoke;
+}
+.admin-content ul {
+  width: 90%;
+  margin: auto;
+  list-style: decimal;
+}
+.admin-content ul li {
+  margin: 5px;
+  padding: 0px;
+  background-color: #eee9e9;
+  border-radius: 5px;
+}
 .back-arrow {
-  margin-top: -900px;
   cursor: pointer;
   font-size: 1.4rem;
 }
@@ -166,6 +291,7 @@ body {
   text-align: center;
   border: 1px dashed #888;
   padding: 25px;
+  background-color: white;
 }
 .admins {
   flex: 3;
@@ -185,6 +311,11 @@ button {
 .Admin button:hover {
   background-color: #111111;
   cursor: pointer;
+}
+.Admin .logo {
+  color: #111111;
+
+  flex-direction: row;
 }
 .Home {
   min-height: 100vh;
@@ -234,7 +365,7 @@ button {
 .logo i {
   color: #fe9000;
 }
-.Sidebar img {
+.logo img {
   width: 30px;
   filter: invert(30%) sepia(72%) saturate(3433%) hue-rotate(11deg)
     brightness(100%) contrast(102%);
@@ -476,7 +607,7 @@ button {
   margin: 0px;
   padding: 25px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   flex-wrap: wrap;
   flex: 4;
   gap: 25px;
@@ -785,16 +916,15 @@ button {
     padding: 12px 30px;
     margin: 15px;
   }
-  .Admin {
+  .admin-content {
     flex-direction: column;
-    padding: 50px;
   }
-
-  .back-arrow {
-    margin: 5px 280px 5px 0px;
-
-    cursor: pointer;
-    font-size: 1.4rem;
+  .admin-form {
+    width: 70vw;
+  }
+  .admin-header {
+    padding-left: 0px;
+    justify-content: center;
   }
 }
 
