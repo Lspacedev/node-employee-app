@@ -21,9 +21,9 @@ function AdminLogin() {
         "Content-Type": "application/json",
     },
     });
-    let data = response.json();
+    let data = await response.json();
     console.log(data)
-    setCsrf(data)
+    setCsrf(data.csrf)
   }
   function login() {
     signInWithEmailAndPassword(auth, email, password)
