@@ -23,6 +23,7 @@ function AdminLogin() {
     },
     });
     let data = await response.json();
+    console.log({response, data})
     console.log(data.csrf)
     setCsrf(data.csrf)
   }catch(err){
