@@ -22,16 +22,18 @@ function AdminLogin() {
     },
     });
     let data = await response.json();
-    console.log(data)
+    console.log(data.csrf)
     setCsrf(data.csrf)
   }
   function login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+        console.log(csrf)
         return user.getIdToken().then((idToken) => {
           return fetch("http://localhost:8000/login", {
             method: "POST",
             credentials: "include",
+            mode: "cors",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
