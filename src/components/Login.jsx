@@ -52,7 +52,6 @@ function AdminLogin() {
       .then(() => {
         alert("Log in successfully");
         navigation("/home");
-        //window.location.assign("/profile");
       })
       .catch((err) => setErr(err.message));
   }
