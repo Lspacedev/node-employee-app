@@ -17,10 +17,12 @@ function AdminLogin() {
       credentials: "include",
     });
   }
+  console.log(Cookies.get("_csrf"));
+  console.log(Cookies.get("XSRF-TOKEN"));
   function login() {
+    console.log(Cookies.get("XSRF-TOKEN"));
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        console.log(Cookies.get("XSRF-TOKEN"));
         return user.getIdToken().then((idToken) => {
           return fetch("http://localhost:8000/login", {
             method: "POST",
@@ -28,7 +30,7 @@ function AdminLogin() {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+              "CSRF-Token": Cookies.get("_csrf"),
             },
             body: JSON.stringify({ idToken }),
           });
