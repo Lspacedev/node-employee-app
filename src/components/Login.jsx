@@ -20,6 +20,7 @@ function AdminLogin() {
   function login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
+        console.log(Cookies.get("XSRF-TOKEN"));
         return user.getIdToken().then((idToken) => {
           return fetch("http://localhost:8000/login", {
             method: "POST",
