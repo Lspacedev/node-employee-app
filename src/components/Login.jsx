@@ -22,6 +22,7 @@ function AdminLogin() {
     },
     });
     let data = response.json();
+    console.log(data)
     setCsrf(data)
   }
   function login() {
