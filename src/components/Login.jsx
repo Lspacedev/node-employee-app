@@ -7,15 +7,22 @@ function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
+  const [csrf, setCsrf] = useState("")
   const navigation = useNavigate();
   useEffect(() => {
     getCsrf();
   }, []);
   async function getCsrf() {
-    await fetch("http://localhost:8000/", {
+    const response = await fetch("http://localhost:8000/", {
       method: "GET",
       credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
     });
+    let data = response.json();
+    setCsrf(data)
   }
   function login() {
     signInWithEmailAndPassword(auth, email, password)
@@ -27,7 +34,7 @@ function AdminLogin() {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+              "CSRF-Token": csrf,
             },
             body: JSON.stringify({ idToken }),
           });
