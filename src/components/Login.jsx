@@ -13,6 +13,7 @@ function AdminLogin() {
     getCsrf();
   }, []);
   async function getCsrf() {
+    try{
     const response = await fetch("http://localhost:8000/", {
       method: "GET",
       credentials: "include",
@@ -24,6 +25,9 @@ function AdminLogin() {
     let data = await response.json();
     console.log(data.csrf)
     setCsrf(data.csrf)
+  }catch(err){
+    console.log(err)
+  }
   }
   function login() {
     signInWithEmailAndPassword(auth, email, password)
