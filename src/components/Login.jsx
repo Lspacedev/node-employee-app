@@ -24,7 +24,7 @@ function AdminLogin() {
         },
       });
       let data = await response.json();
-
+      console.log(data);
       setCsrf(data.csrfToken);
     } catch (err) {
       console.log(err);
