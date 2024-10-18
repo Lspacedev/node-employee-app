@@ -5,11 +5,34 @@ import { CiLogout } from "react-icons/ci";
 import SidebarLinks from "./sidebarLinks";
 import { auth } from "../config/firebase";
 import { useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 import Cookies from "js-cookie";
 
 function Sidebar() {
   const navigation = useNavigate();
+  const [csrf, setCsrf] = useState("");
+
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   function logout() {
     fetch("http://localhost:8000/logout", {
       method: "POST",
@@ -17,7 +40,7 @@ function Sidebar() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+        "CSRF-Token": csrf,
       },
     })
       .then((res) => res.json())
