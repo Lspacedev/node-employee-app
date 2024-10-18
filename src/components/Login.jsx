@@ -6,6 +6,7 @@ import { auth } from "../config/firebase";
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(true);
   const [err, setErr] = useState("");
   const [csrf, setCsrf] = useState("");
   const navigation = useNavigate();
@@ -25,6 +26,7 @@ function AdminLogin() {
       });
       let data = await response.json();
       setCsrf(data.csrfToken);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -64,6 +66,8 @@ function AdminLogin() {
   function goRegister() {
     navigation("/register");
   }
+  if (loading === true) return <div className="loading">Loading...</div>;
+
   return (
     <div className="Login">
       <div className="login-form-container">

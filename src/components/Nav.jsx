@@ -6,7 +6,6 @@ function Nav() {
   }
   function goLogin() {
     navigation("/login");
-    navigation(0);
   }
   return (
     <div className="Nav">
