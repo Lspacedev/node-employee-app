@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { Image } from "react";
-import Cookies from "js-cookie";
 
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({

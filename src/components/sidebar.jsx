@@ -3,11 +3,9 @@ import { RiDashboardLine } from "react-icons/ri";
 import { CiLogout } from "react-icons/ci";
 
 import SidebarLinks from "./sidebarLinks";
-import { auth } from "../config/firebase";
-import { useNavigate, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Sidebar() {
   const navigation = useNavigate();

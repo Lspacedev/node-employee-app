@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import Employee from "./employee";
 import useLocalStorage from "./useLocalStorage";
-import { IoIosSearch } from "react-icons/io";
 import AddEmployee from "./addEmployee";
 import ProfileIcon from "./profileIcon";
 import SeachBar from "./searchBar";
-import { useNavigate, Link } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 function DisplayEmployees() {
   const [employees, setEmployees] = useState([]);
