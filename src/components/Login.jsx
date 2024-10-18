@@ -11,13 +11,13 @@ function AdminLogin() {
   const navigation = useNavigate();
   useEffect(() => {
     getCsrf();
-    window.location.reload(false);
   }, []);
   async function getCsrf() {
     try {
       const response = await fetch("http://localhost:8000/", {
         method: "GET",
         credentials: "include",
+
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
