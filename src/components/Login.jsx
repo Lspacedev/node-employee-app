@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 
-function AdminLogin() {
+function AdminLogin({ csrfT }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
@@ -40,7 +40,7 @@ function AdminLogin() {
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
-              "CSRF-Token": csrf,
+              "CSRF-Token": csrfT,
             },
             body: JSON.stringify({ idToken }),
           });
