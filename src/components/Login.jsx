@@ -10,6 +10,7 @@ function AdminLogin() {
   const [csrf, setCsrf] = useState("");
   const navigation = useNavigate();
   useEffect(() => {
+    console.log("mounted");
     getCsrf();
   }, []);
   async function getCsrf() {
