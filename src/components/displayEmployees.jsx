@@ -34,15 +34,42 @@ function DisplayEmployees() {
   );
 
   const [searchResults, setSearchResults] = useState([]);
+  const [csrf, setCsrf] = useState("");
+
   useEffect(() => {
     fetchEmployees();
   }, [data]);
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function fetchEmployees() {
     try {
       const response = await fetch("http://localhost:8000/employees", {
         method: "GET",
         credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "CSRF-Token": csrf,
+        },
       });
 
       if (response.redirected === true) {
@@ -128,7 +155,7 @@ function DisplayEmployees() {
           method: "DELETE",
           credentials: "include",
           headers: {
-            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+            "CSRF-Token": csrf,
           },
         });
 
@@ -182,7 +209,7 @@ function DisplayEmployees() {
               method: "PUT",
               credentials: "include",
               headers: {
-                "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                "CSRF-Token": csrf,
               },
               body: formData,
             }

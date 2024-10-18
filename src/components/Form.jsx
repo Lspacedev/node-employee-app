@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Image } from "react";
 import Cookies from "js-cookie";
 
@@ -15,6 +15,28 @@ function Form({ toggleClicked }) {
     date: "",
     edit: false,
   });
+  const [csrf, setCsrf] = useState("");
+
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -44,7 +66,7 @@ function Form({ toggleClicked }) {
         method: "POST",
         credentials: "include",
         headers: {
-          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          "CSRF-Token": csrf,
         },
         body: formData,
       });
