@@ -12,7 +12,7 @@ function AdminLogin() {
   useEffect(() => {
     console.log("mounted");
     getCsrf();
-  }, [csrf]);
+  }, []);
   async function getCsrf() {
     try {
       const response = await fetch("http://localhost:8000/", {
