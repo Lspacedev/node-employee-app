@@ -25,6 +25,7 @@ function AdminLogin() {
       let data = await response.json();
 
       setCsrf(data.csrfToken);
+      window.location.reload(false);
     } catch (err) {
       console.log(err);
     }
