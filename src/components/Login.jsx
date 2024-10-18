@@ -39,7 +39,6 @@ function AdminLogin() {
         if (data.status === "success") {
           localStorage.setItem("auth", true);
         }
-        // A page redirect would suffice as the persistence is set to NONE.
         return auth.signOut();
       })
       .then(() => {
