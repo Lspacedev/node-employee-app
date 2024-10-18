@@ -3,32 +3,32 @@ import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
 
-function AdminLogin({ csrf }) {
+function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
-  //const [csrf, setCsrf] = useState("");
+  const [csrf, setCsrf] = useState("");
   const navigation = useNavigate();
-  // useEffect(() => {
-  //   getCsrf();
-  // }, []);
-  // async function getCsrf() {
-  //   try {
-  //     const response = await fetch("http://localhost:8000/", {
-  //       method: "GET",
-  //       credentials: "include",
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
 
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     let data = await response.json();
-  //     setCsrf(data.csrfToken);
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   function login() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
