@@ -11,6 +11,7 @@ function AdminLogin() {
   const navigation = useNavigate();
   useEffect(() => {
     getCsrf();
+    window.location.reload(false);
   }, []);
   async function getCsrf() {
     try {
@@ -30,8 +31,6 @@ function AdminLogin() {
     }
   }
   function login() {
-    window.location.reload(false);
-
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         return user.getIdToken().then((idToken) => {
