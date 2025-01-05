@@ -6,7 +6,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Admin from "./components/Admin";
-import Register from "./components/Register";
+// import Register from "./components/Register";
 import Landing from "./components/Landing";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <Route exact path="/" element={<Landing />} />
 
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
+          {/* <Route exact path="/register" element={<Register />} /> */}
 
           <Route element={<ProtectedRoutes />}>
             <Route path="home" element={<Home />} />

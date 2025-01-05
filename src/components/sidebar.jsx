@@ -50,23 +50,24 @@ function Sidebar() {
   return (
     <div className="Sidebar">
       <div className="logo">
-        {" "}
         <img src="./images/icon.png" />
         <div>
           Employee<i>Manager</i>
         </div>
       </div>
       <SidebarLinks>
-        <RiDashboardLine />
-        <p>Dashboard</p>
+        <RiDashboardLine className="icon" />
+        <p className="text">Dashboard</p>
       </SidebarLinks>
       <SidebarLinks>
-        <IoPersonOutline />
-        <p>Employees</p>
+        <IoPersonOutline className="icon" />
+        <p className="text">Employees</p>
       </SidebarLinks>
-      <SidebarLinks className="logout">
-        <CiLogout />
-        <p onClick={logout}>Logout</p>
+      <SidebarLinks className="logout icon">
+        <CiLogout className="icon" />
+        <p className="text" onClick={logout}>
+          Logout
+        </p>
       </SidebarLinks>
     </div>
   );

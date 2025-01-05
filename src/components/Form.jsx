@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { IoCloseOutline } from "react-icons/io5";
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
     id: "",
@@ -14,6 +15,7 @@ function Form({ toggleClicked }) {
     edit: false,
   });
   const [csrf, setCsrf] = useState("");
+  const navigation = useNavigate();
 
   useEffect(() => {
     getCsrf();
@@ -69,17 +71,19 @@ function Form({ toggleClicked }) {
         body: formData,
       });
 
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         alert(data.message);
       } else {
         // Handle error
       }
     } catch (error) {
+      console.log(error);
       // Handle error
       alert(error.message);
     }
     toggleClicked();
+    navigation(0);
   }
 
   function handleFormClose() {
@@ -90,7 +94,7 @@ function Form({ toggleClicked }) {
     <div className="Form">
       <div className="form-div">
         <div className="form-close" onClick={handleFormClose}>
-          x
+          <IoCloseOutline />
         </div>
         <form>
           <h5>Enter employee information</h5>

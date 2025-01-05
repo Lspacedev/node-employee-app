@@ -19,9 +19,9 @@ function Nav() {
         <button className="login-btn" onClick={goLogin}>
           Login
         </button>
-        <button className="register-btn" onClick={goRegister}>
+        {/* <button className="register-btn" onClick={goRegister}>
           Register
-        </button>
+        </button> */}
       </div>
     </div>
   );

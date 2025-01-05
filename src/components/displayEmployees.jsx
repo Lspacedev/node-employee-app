@@ -13,6 +13,8 @@ function DisplayEmployees() {
   const navigation = useNavigate();
 
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
   const [obj, setObj] = useState({
     name: "",
     surname: "",
@@ -81,10 +83,12 @@ function DisplayEmployees() {
         setLoading(false);
       } else {
         // Handle error
+        setLoading(false);
       }
     } catch (error) {
       // Handle error
       setErr(error.message);
+      setLoading(false);
     }
   }
   /* Update screen on every change in search input */
@@ -106,7 +110,12 @@ function DisplayEmployees() {
           employee.email.match(submittedSearch) ||
           employee.date.toLowerCase().match(submittedSearch.toLowerCase())
       );
+      if (filteredEmployees.length === 0) {
+        setNotFound(true);
+      }
       setSearchResults(filteredEmployees);
+    } else {
+      setSearchResults(employees);
     }
     return () => {
       setSearchResults([]);
@@ -220,6 +229,7 @@ function DisplayEmployees() {
           } else {
             // Handle error
           }
+          navigation(0);
         } catch (error) {
           // Handle error
           setErr(error.message);
@@ -278,45 +288,49 @@ function DisplayEmployees() {
       </div>
 
       <ul className="employees-display">
-        {searchResults.length !== 0
-          ? searchResults.map((employee, i) => (
-              <li key={i}>
-                <Employee
-                  edit={employee.edit}
-                  name={employee.name}
-                  surname={employee.surname}
-                  position={employee.position}
-                  department={employee.department}
-                  email={employee.email}
-                  phone={employee.phone}
-                  pic={employee.pic}
-                  date={employee.date}
-                  id={employee.docId}
-                  handleDeleteEmployee={handleDeleteEmployee}
-                  handleUpdate={handleUpdate}
-                  handleResubmit={handleResubmit}
-                />
-              </li>
-            ))
-          : employees.map((employee, i) => (
-              <li key={i}>
-                <Employee
-                  edit={employee.edit}
-                  name={employee.name}
-                  surname={employee.surname}
-                  position={employee.position}
-                  department={employee.department}
-                  email={employee.email}
-                  phone={employee.phone}
-                  pic={employee.pic}
-                  date={employee.date}
-                  id={employee.docId}
-                  handleDeleteEmployee={handleDeleteEmployee}
-                  handleUpdate={handleUpdate}
-                  handleResubmit={handleResubmit}
-                />
-              </li>
-            ))}
+        {searchResults.length !== 0 ? (
+          searchResults.map((employee, i) => (
+            <li key={i}>
+              <Employee
+                edit={employee.edit}
+                name={employee.name}
+                surname={employee.surname}
+                position={employee.position}
+                department={employee.department}
+                email={employee.email}
+                phone={employee.phone}
+                pic={employee.pic}
+                date={employee.date}
+                id={employee.docId}
+                handleDeleteEmployee={handleDeleteEmployee}
+                handleUpdate={handleUpdate}
+                handleResubmit={handleResubmit}
+              />
+            </li>
+          ))
+        ) : searchResults.length === 0 && notFound === true ? (
+          <div>No results</div>
+        ) : (
+          employees.map((employee, i) => (
+            <li key={i}>
+              <Employee
+                edit={employee.edit}
+                name={employee.name}
+                surname={employee.surname}
+                position={employee.position}
+                department={employee.department}
+                email={employee.email}
+                phone={employee.phone}
+                pic={employee.pic}
+                date={employee.date}
+                id={employee.docId}
+                handleDeleteEmployee={handleDeleteEmployee}
+                handleUpdate={handleUpdate}
+                handleResubmit={handleResubmit}
+              />
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
