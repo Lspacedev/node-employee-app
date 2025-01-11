@@ -44,7 +44,7 @@ function DisplayEmployees() {
   }, []);
   async function getCsrf() {
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -62,7 +62,7 @@ function DisplayEmployees() {
 
   async function fetchEmployees() {
     try {
-      const response = await fetch("http://localhost:8000/employees", {
+      const response = await fetch(`${process.env.PROD_URL}/employees`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -158,13 +158,16 @@ function DisplayEmployees() {
     );
     if (deleteConfirmation) {
       try {
-        const response = await fetch(`http://localhost:8000/employees/${id}`, {
-          method: "DELETE",
-          credentials: "include",
-          headers: {
-            "CSRF-Token": csrf,
-          },
-        });
+        const response = await fetch(
+          `${process.env.PROD_URL}/employees/${id}`,
+          {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+              "CSRF-Token": csrf,
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -211,7 +214,7 @@ function DisplayEmployees() {
 
         try {
           const response = await fetch(
-            `http://localhost:8000/employees/${id}`,
+            `${process.env.PROD_URL}/employees/${id}`,
             {
               method: "PUT",
               credentials: "include",

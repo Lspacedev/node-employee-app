@@ -16,7 +16,7 @@ function Sidebar() {
   }, []);
   async function getCsrf() {
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -32,7 +32,7 @@ function Sidebar() {
     }
   }
   function logout() {
-    fetch("http://localhost:8000/logout", {
+    fetch(`${process.env.PROD_URL}/logout`, {
       method: "POST",
       credentials: "include",
       headers: {

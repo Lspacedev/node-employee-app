@@ -17,7 +17,7 @@ function AdminLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
         method: "GET",
         credentials: "include",
 
@@ -37,7 +37,7 @@ function AdminLogin() {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         return user.getIdToken().then((idToken) => {
-          return fetch("http://localhost:8000/login", {
+          return fetch(`${process.env.PROD_URL}/login`, {
             method: "POST",
             credentials: "include",
             mode: "cors",
@@ -73,7 +73,7 @@ function AdminLogin() {
     )
       .then(({ user }) => {
         return user.getIdToken().then((idToken) => {
-          return fetch("http://localhost:8000/login", {
+          return fetch(`${process.env.PROD_URL}/login`, {
             method: "POST",
             credentials: "include",
             mode: "cors",

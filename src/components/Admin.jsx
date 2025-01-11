@@ -17,7 +17,7 @@ function Admin() {
   }, []);
   async function getCsrf() {
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -34,7 +34,7 @@ function Admin() {
   }
   async function fetchAdmins() {
     try {
-      const response = await fetch("http://localhost:8000/admins", {
+      const response = await fetch(`${process.env.PROD_URL}/admins`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -66,7 +66,7 @@ function Admin() {
     formData.append("password", password);
 
     try {
-      const response = await fetch("http://localhost:8000/admins", {
+      const response = await fetch(`${process.env.PROD_URL}/admins`, {
         method: "POST",
         credentials: "include",
         headers: {

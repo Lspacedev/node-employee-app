@@ -22,7 +22,7 @@ function Form({ toggleClicked }) {
   }, []);
   async function getCsrf() {
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -62,7 +62,7 @@ function Form({ toggleClicked }) {
     formData.append("pic", obj.pic);
 
     try {
-      const response = await fetch("http://localhost:8000/employees", {
+      const response = await fetch(`${process.env.PROD_URL}/employees`, {
         method: "POST",
         credentials: "include",
         headers: {

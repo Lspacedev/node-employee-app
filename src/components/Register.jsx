@@ -13,7 +13,7 @@ function Register() {
   }, []);
   async function getCsrf() {
     try {
-      const response = await fetch("http://localhost:8000/", {
+      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -30,7 +30,7 @@ function Register() {
   }
   async function register() {
     try {
-      const response = await fetch("http://localhost:8000/register", {
+      const response = await fetch(`${process.env.PROD_URL}/register`, {
         method: "POST",
         credentials: "include",
         headers: {
