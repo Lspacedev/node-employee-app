@@ -463,14 +463,10 @@ button {
 
 .search-div input[type="search"] {
   flex: 5;
-  margin: 0px;
+  margin: 0px 2px;
   border: none;
   box-sizing: border-box;
 }
-.search-div input[type="search"]:focus {
-  margin: 0px;
-}
-
 #search-icon-div {
   flex: 1;
   height: 100%;
