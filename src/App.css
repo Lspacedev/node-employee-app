@@ -467,6 +467,9 @@ button {
   border: none;
   box-sizing: border-box;
 }
+.search-div input[type="search"]:focus {
+  margin: 0px;
+}
 
 #search-icon-div {
   flex: 1;
