@@ -437,6 +437,7 @@ button {
   flex: 5;
   margin: 0px;
   border: none;
+  box-sizing: border-box;
 }
 
 #search-icon-div {
