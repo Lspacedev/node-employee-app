@@ -57,10 +57,11 @@ body {
   gap: 10px;
 }
 .login-btn {
-  border: none;
   padding: 5px 10px;
   border-radius: 5px;
-  background-color: white;
+  border: 1px solid white;
+  color: white;
+  background-color: transparent;
 }
 .register-btn {
   padding: 5px 10px;
@@ -71,7 +72,7 @@ body {
 }
 .login-btn:hover {
   background-color: #eb4a00;
-  color: white;
+  border: 1px solid #111111;
   cursor: pointer;
 }
 .register-btn:hover {
@@ -98,6 +99,7 @@ body {
   cursor: pointer;
 }
 .Showcase div {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -111,9 +113,10 @@ body {
   /* background-color: rgb(245, 242, 242); */
 }
 .Showcase img {
+  flex: 1;
   width: 50%;
-  height: 70%;
-  border-radius: 25px;
+  height: 75%;
+  border-radius: 15px;
   opacity: 0.8;
 }
 
@@ -233,6 +236,18 @@ body {
   cursor: pointer;
   background-color: #094074;
 }
+.Login .form .guest-submit-btn {
+  width: 100%;
+  padding: 5px 15px;
+  background-color: #e06500;
+  color: white;
+  border: none;
+  margin: 10px 0px;
+}
+.Login .form .guest-submit-btn:hover {
+  cursor: pointer;
+  background-color: #094074;
+}
 
 .login-link {
   cursor: pointer;
@@ -285,6 +300,11 @@ body {
 .back-arrow {
   cursor: pointer;
   font-size: 1.4rem;
+  padding: 5px;
+  border-radius: 50%;
+}
+.back-arrow:hover {
+  background-color: rgba(69, 69, 69, 0.192);
 }
 .admin-form {
   flex: 1;
@@ -372,7 +392,7 @@ button {
   border-radius: 10px;
 }
 .Sidebar .SidebarLinks {
-  margin: 5px 0px;
+  margin: 5px 25px;
 
   cursor: pointer;
   display: flex;
@@ -380,15 +400,23 @@ button {
   align-items: center;
   color: rgb(207, 207, 207);
 }
-.SidebarLinks:hover {
-  background-color: #fff2e1;
-  color: #004b92;
-  border-radius: 0px 15px 15px 0px;
+
+.SidebarLinks .icon {
+  flex: 1;
+  font-size: 32px;
 }
 
-.SidebarLinks {
-  justify-self: baseline;
+.SidebarLinks .text {
+  flex: 2;
+  display: flex;
+  justify-content: flex-start;
 }
+.SidebarLinks:hover {
+  background-color: white;
+  color: #004b92;
+  border-radius: 15px;
+}
+
 .Main {
   grid-column: 2/6;
   grid-row: 1/11;
@@ -530,7 +558,7 @@ button {
 .form-div form {
   margin: 0 auto 0 auto;
   padding: 25px;
-  width: 400px;
+  width: 500px;
   height: auto;
   overflow: hidden;
   background-color: white;

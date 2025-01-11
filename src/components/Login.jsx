@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../config/firebase";
-import Cookies from "js-cookie";
+
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const [csrf, setCsrf] = useState("");
   const navigation = useNavigate();
@@ -13,18 +14,21 @@ function AdminLogin() {
     getCsrf();
   }, []);
   async function getCsrf() {
+    setLoading(true);
+
     try {
       const response = await fetch("http://localhost:8000/", {
         method: "GET",
         credentials: "include",
+
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
       });
       let data = await response.json();
-
       setCsrf(data.csrfToken);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
@@ -61,9 +65,47 @@ function AdminLogin() {
       })
       .catch((err) => setErr(err.message));
   }
+  function guestLogin() {
+    signInWithEmailAndPassword(
+      auth,
+      import.meta.env.VITE_GUEST_EMAIL,
+      import.meta.env.VITE_GUEST_PASSWORD
+    )
+      .then(({ user }) => {
+        return user.getIdToken().then((idToken) => {
+          return fetch("http://localhost:8000/login", {
+            method: "POST",
+            credentials: "include",
+            mode: "cors",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "CSRF-Token": csrf,
+            },
+            body: JSON.stringify({ idToken }),
+          });
+        });
+      })
+      .then(async (res) => {
+        const data = await res.json();
+
+        if (data.status === "success") {
+          localStorage.setItem("auth", true);
+        }
+        // A page redirect would suffice as the persistence is set to NONE.
+        return auth.signOut();
+      })
+      .then(() => {
+        alert("Log in successfully");
+        navigation("/home");
+      })
+      .catch((err) => setErr(err.message));
+  }
   function goRegister() {
     navigation("/register");
   }
+  if (loading === true) return <div className="loading">Loading...</div>;
+
   return (
     <div className="Login">
       <div className="login-form-container">
@@ -98,12 +140,15 @@ function AdminLogin() {
           <button className="submit-btn" onClick={login}>
             Login
           </button>
-          <div>
+          <button className="guest-submit-btn" onClick={guestLogin}>
+            Guest Admin Login
+          </button>
+          {/* <div>
             Don't have an account?{" "}
             <span className="register-link" onClick={goRegister}>
               Register
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="showcase">

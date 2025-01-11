@@ -1,20 +1,32 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
+
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
+  const [csrf, setCsrf] = useState("");
 
   const navigation = useNavigate();
   useEffect(() => {
     getCsrf();
   }, []);
   async function getCsrf() {
-    await fetch("http://localhost:8000/", {
-      method: "GET",
-      credentials: "include",
-    });
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
   }
   async function register() {
     try {
@@ -24,7 +36,7 @@ function Register() {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          "CSRF-Token": csrf,
         },
         body: JSON.stringify({ email, password }),
       });

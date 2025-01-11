@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { Image } from "react";
-import Cookies from "js-cookie";
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { IoCloseOutline } from "react-icons/io5";
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
     id: "",
@@ -15,6 +14,29 @@ function Form({ toggleClicked }) {
     date: "",
     edit: false,
   });
+  const [csrf, setCsrf] = useState("");
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -44,22 +66,24 @@ function Form({ toggleClicked }) {
         method: "POST",
         credentials: "include",
         headers: {
-          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          "CSRF-Token": csrf,
         },
         body: formData,
       });
 
+      const data = await response.json();
       if (response.ok) {
-        const data = await response.json();
         alert(data.message);
       } else {
         // Handle error
       }
     } catch (error) {
+      console.log(error);
       // Handle error
       alert(error.message);
     }
     toggleClicked();
+    navigation(0);
   }
 
   function handleFormClose() {
@@ -70,7 +94,7 @@ function Form({ toggleClicked }) {
     <div className="Form">
       <div className="form-div">
         <div className="form-close" onClick={handleFormClose}>
-          x
+          <IoCloseOutline />
         </div>
         <form>
           <h5>Enter employee information</h5>

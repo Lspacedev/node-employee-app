@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import Employee from "./employee";
 import useLocalStorage from "./useLocalStorage";
-import { IoIosSearch } from "react-icons/io";
 import AddEmployee from "./addEmployee";
 import ProfileIcon from "./profileIcon";
 import SeachBar from "./searchBar";
-import { useNavigate, Link } from "react-router-dom";
-import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 function DisplayEmployees() {
   const [employees, setEmployees] = useState([]);
@@ -15,6 +13,8 @@ function DisplayEmployees() {
   const navigation = useNavigate();
 
   const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
   const [obj, setObj] = useState({
     name: "",
     surname: "",
@@ -34,15 +34,42 @@ function DisplayEmployees() {
   );
 
   const [searchResults, setSearchResults] = useState([]);
+  const [csrf, setCsrf] = useState("");
+
   useEffect(() => {
     fetchEmployees();
   }, [data]);
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   async function fetchEmployees() {
     try {
       const response = await fetch("http://localhost:8000/employees", {
         method: "GET",
         credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "CSRF-Token": csrf,
+        },
       });
 
       if (response.redirected === true) {
@@ -56,10 +83,12 @@ function DisplayEmployees() {
         setLoading(false);
       } else {
         // Handle error
+        setLoading(false);
       }
     } catch (error) {
       // Handle error
       setErr(error.message);
+      setLoading(false);
     }
   }
   /* Update screen on every change in search input */
@@ -81,7 +110,12 @@ function DisplayEmployees() {
           employee.email.match(submittedSearch) ||
           employee.date.toLowerCase().match(submittedSearch.toLowerCase())
       );
+      if (filteredEmployees.length === 0) {
+        setNotFound(true);
+      }
       setSearchResults(filteredEmployees);
+    } else {
+      setSearchResults(employees);
     }
     return () => {
       setSearchResults([]);
@@ -128,7 +162,7 @@ function DisplayEmployees() {
           method: "DELETE",
           credentials: "include",
           headers: {
-            "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+            "CSRF-Token": csrf,
           },
         });
 
@@ -182,7 +216,7 @@ function DisplayEmployees() {
               method: "PUT",
               credentials: "include",
               headers: {
-                "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                "CSRF-Token": csrf,
               },
               body: formData,
             }
@@ -195,6 +229,7 @@ function DisplayEmployees() {
           } else {
             // Handle error
           }
+          navigation(0);
         } catch (error) {
           // Handle error
           setErr(error.message);
@@ -253,45 +288,49 @@ function DisplayEmployees() {
       </div>
 
       <ul className="employees-display">
-        {searchResults.length !== 0
-          ? searchResults.map((employee, i) => (
-              <li key={i}>
-                <Employee
-                  edit={employee.edit}
-                  name={employee.name}
-                  surname={employee.surname}
-                  position={employee.position}
-                  department={employee.department}
-                  email={employee.email}
-                  phone={employee.phone}
-                  pic={employee.pic}
-                  date={employee.date}
-                  id={employee.docId}
-                  handleDeleteEmployee={handleDeleteEmployee}
-                  handleUpdate={handleUpdate}
-                  handleResubmit={handleResubmit}
-                />
-              </li>
-            ))
-          : employees.map((employee, i) => (
-              <li key={i}>
-                <Employee
-                  edit={employee.edit}
-                  name={employee.name}
-                  surname={employee.surname}
-                  position={employee.position}
-                  department={employee.department}
-                  email={employee.email}
-                  phone={employee.phone}
-                  pic={employee.pic}
-                  date={employee.date}
-                  id={employee.docId}
-                  handleDeleteEmployee={handleDeleteEmployee}
-                  handleUpdate={handleUpdate}
-                  handleResubmit={handleResubmit}
-                />
-              </li>
-            ))}
+        {searchResults.length !== 0 ? (
+          searchResults.map((employee, i) => (
+            <li key={i}>
+              <Employee
+                edit={employee.edit}
+                name={employee.name}
+                surname={employee.surname}
+                position={employee.position}
+                department={employee.department}
+                email={employee.email}
+                phone={employee.phone}
+                pic={employee.pic}
+                date={employee.date}
+                id={employee.docId}
+                handleDeleteEmployee={handleDeleteEmployee}
+                handleUpdate={handleUpdate}
+                handleResubmit={handleResubmit}
+              />
+            </li>
+          ))
+        ) : searchResults.length === 0 && notFound === true ? (
+          <div>No results</div>
+        ) : (
+          employees.map((employee, i) => (
+            <li key={i}>
+              <Employee
+                edit={employee.edit}
+                name={employee.name}
+                surname={employee.surname}
+                position={employee.position}
+                department={employee.department}
+                email={employee.email}
+                phone={employee.phone}
+                pic={employee.pic}
+                date={employee.date}
+                id={employee.docId}
+                handleDeleteEmployee={handleDeleteEmployee}
+                handleUpdate={handleUpdate}
+                handleResubmit={handleResubmit}
+              />
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );

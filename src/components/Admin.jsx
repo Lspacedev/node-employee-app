@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
@@ -7,17 +6,39 @@ function Admin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [admins, setAdmins] = useState([]);
+  const [csrf, setCsrf] = useState("");
+
   const navigation = useNavigate();
   useEffect(() => {
     fetchAdmins();
   }, []);
+  useEffect(() => {
+    getCsrf();
+  }, []);
+  async function getCsrf() {
+    try {
+      const response = await fetch("http://localhost:8000/", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      let data = await response.json();
+
+      setCsrf(data.csrfToken);
+    } catch (err) {
+      console.log(err);
+    }
+  }
   async function fetchAdmins() {
     try {
       const response = await fetch("http://localhost:8000/admins", {
         method: "GET",
         credentials: "include",
         headers: {
-          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          "CSRF-Token": csrf,
         },
       });
 
@@ -51,7 +72,7 @@ function Admin() {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+          "CSRF-Token": csrf,
         },
         body: JSON.stringify({ email, password }),
       });
@@ -63,6 +84,7 @@ function Admin() {
       if (response.ok) {
         const data = await response.json();
         alert(data.message);
+        navigation(0);
       } else {
         // Handle error
       }
