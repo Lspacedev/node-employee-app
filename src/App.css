@@ -104,7 +104,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
 
   color: white;
@@ -873,6 +873,16 @@ button {
 }
 
 @media (max-width: 768px) {
+  .Landing {
+    overflow-y: auto;
+  }
+  .Showcase {
+    flex-direction: column;
+  }
+
+  .Showcase img {
+    display: none;
+  }
   .Home {
     display: flex;
     flex-direction: column;
@@ -880,10 +890,6 @@ button {
     margin: 0;
   }
 
-  .search-profile {
-    flex-direction: column-reverse;
-    align-items: center;
-  }
   .Login {
     flex-direction: column-reverse;
   }
@@ -934,15 +940,33 @@ button {
   .form-div form input {
     float: right;
   }
+
   .header {
     flex-direction: column;
+  }
+  .search-profile {
+    padding: 0px;
+    flex-direction: column-reverse;
   }
   .search-div {
     width: 100%;
   }
+
+  .search-div input[type="search"] {
+    width: 80px;
+  }
+  #search-icon-div {
+    width: 5%;
+  }
+
+  #search-btn {
+  }
   .Add-div button {
     padding: 12px 30px;
     margin: 15px;
+  }
+  .Admin {
+    overflow-y: auto;
   }
   .admin-content {
     flex-direction: column;
@@ -957,6 +981,9 @@ button {
 }
 
 @media (max-width: 480px) {
+  .Nav {
+    padding: 0px;
+  }
   .Sidebar {
     padding: 20px 0px;
   }
@@ -967,6 +994,9 @@ button {
     text-align: end;
     font-size: 1.5rem;
     margin-right: 0px;
+  }
+  .Showcase div {
+    font-size: 2rem;
   }
 }
 @media (max-width: 375px) {
@@ -1001,6 +1031,7 @@ button {
 
   .Form {
     overflow-y: scroll;
+    flex-direction: column;
   }
 
   .form-div {

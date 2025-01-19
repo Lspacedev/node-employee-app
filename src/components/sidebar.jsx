@@ -64,7 +64,7 @@ function Sidebar() {
         <p className="text">Employees</p>
       </SidebarLinks>
       <SidebarLinks className="logout icon">
-        <CiLogout className="icon" />
+        <CiLogout className="icon" onClick={logout} />
         <p className="text" onClick={logout}>
           Logout
         </p>
