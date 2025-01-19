@@ -16,7 +16,7 @@ function Sidebar() {
   }, []);
   async function getCsrf() {
     try {
-      const response = await fetch(`${process.env.PROD_URL}/tkn`, {
+      const response = await fetch(`${process.env.PROD_URL}/`, {
         method: "GET",
         credentials: "include",
         headers: {
