@@ -6,6 +6,8 @@ import { auth } from "../config/firebase";
 function AdminLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const [csrf, setCsrf] = useState("");
@@ -14,7 +16,7 @@ function AdminLogin() {
     getCsrf();
   }, []);
   async function getCsrf() {
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const response = await fetch(`${process.env.PROD_URL}/`, {
@@ -28,12 +30,19 @@ function AdminLogin() {
       });
       let data = await response.json();
       setCsrf(data.csrfToken);
-      setLoading(false);
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
     }
   }
   function login() {
+    if (email === "" || password === "") {
+      alert("Fields required");
+      return;
+    }
+    setLoading(true);
+
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         return user.getIdToken().then((idToken) => {
@@ -60,12 +69,18 @@ function AdminLogin() {
         return auth.signOut();
       })
       .then(() => {
+        setLoading(false);
         alert("Log in successfully");
         navigation("/home");
       })
-      .catch((err) => setErr(err.message));
+      .catch((err) => {
+        setErr(err.message);
+        setLoading(false);
+      });
   }
   function guestLogin() {
+    setLoading(true);
+
     signInWithEmailAndPassword(
       auth,
       import.meta.env.VITE_GUEST_EMAIL,
@@ -95,15 +110,19 @@ function AdminLogin() {
         return auth.signOut();
       })
       .then(() => {
+        setLoading(false);
         alert("Log in successfully");
         navigation("/home");
       })
-      .catch((err) => setErr(err.message));
+      .catch((err) => {
+        setErr(err.message);
+        setLoading(false);
+      });
   }
   function goRegister() {
     navigation("/register");
   }
-  if (loading === true) return <div className="loading">Loading...</div>;
+  if (isLoading) return <div style={{ textAlign: "center" }}>Loading...</div>;
 
   return (
     <div className="Login">
@@ -136,11 +155,17 @@ function AdminLogin() {
             />
           </div>
           <br />
-          <button className="submit-btn" onClick={login}>
-            Login
+          <button
+            className="submit-btn"
+            onClick={loading ? console.log() : login}
+          >
+            {loading ? "Loading..." : "Login"}
           </button>
-          <button className="guest-submit-btn" onClick={guestLogin}>
-            Guest Admin Login
+          <button
+            className="guest-submit-btn"
+            onClick={loading ? console.log() : guestLogin}
+          >
+            {loading ? "Loading..." : "Guest"}
           </button>
           {/* <div>
             Don't have an account?{" "}

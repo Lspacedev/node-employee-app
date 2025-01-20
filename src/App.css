@@ -555,9 +555,9 @@ button {
 }
 
 .form-div form {
-  margin: 0 auto 0 auto;
+  margin: 0px;
   padding: 25px;
-  width: 500px;
+  width: calc(100% - 50px);
   height: auto;
   overflow: hidden;
   background-color: white;
@@ -586,6 +586,7 @@ button {
   border: none;
   border-bottom: 1px solid #bbb;
   border-radius: 2px;
+  box-sizing: border-box;
 }
 
 .form-div form label {
@@ -613,7 +614,20 @@ button {
   display: inline-block;
   width: 100%;
 }
-
+.Form .submit-btn {
+  padding: 5px 50px;
+  width: auto;
+  background-color: #e06500;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+}
+.Form .submit-btn:hover {
+  background-color: #094074;
+  color: white;
+}
 .form-div input[type="submit"]:hover {
   background-color: #094074;
   color: white;
@@ -889,12 +903,41 @@ button {
     padding: 0;
     margin: 0;
   }
+  .links {
+    gap: 0px;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .SidebarLinks {
+    margin: 0px;
 
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .SidebarLinks .icon {
+  }
+  .SidebarLinks .text {
+    font-size: 1rem;
+    margin: 0px;
+    padding: 0px;
+  }
   .Login {
     flex-direction: column-reverse;
   }
+
   .Login h2 {
     text-align: center;
+  }
+
+  .Login .form {
+    width: 100%;
+  }
+  .login-form-container {
+    width: 90%;
   }
   .Register {
     flex-direction: column-reverse;
@@ -916,14 +959,18 @@ button {
   .delete-update {
     gap: 80px;
   }
-
+  .form-div {
+    width: 60%;
+    padding: 0px;
+  }
+  .form-close {
+    color: white;
+  }
   .form-div form {
-    margin: 0 auto 0 auto;
-    padding: 2px 25px;
-    width: 70%;
+    padding: 10px 25px;
+    width: calc(100% -50px);
     height: auto;
     overflow: hidden;
-    background-color: white;
   }
 
   .name-surname,
@@ -984,16 +1031,14 @@ button {
   .Nav {
     padding: 0px;
   }
-  .Sidebar {
-    padding: 20px 0px;
-  }
-  .Sidebar div {
-    margin-bottom: 2px;
-  }
+
   .form-close {
     text-align: end;
     font-size: 1.5rem;
     margin-right: 0px;
+  }
+  .form-div {
+    width: 80%;
   }
   .Showcase div {
     font-size: 2rem;
@@ -1005,18 +1050,21 @@ button {
     margin: 15px;
     font-size: 0.7rem;
   }
+  .SidebarLinks .text {
+    display: none;
+  }
+  .Add-div div {
+    padding: 7px 5px;
+
+    font-size: 0.8rem;
+  }
 }
 
 @media (max-width: 320px) {
   .logo {
     margin: 15px;
   }
-  .Sidebar {
-    padding: 20px 0px;
-  }
-  .Sidebar div {
-    margin-bottom: 2px;
-  }
+
   .form-div form input {
     float: none;
     width: 100%;
@@ -1036,6 +1084,7 @@ button {
 
   .form-div {
     overflow-y: scroll;
+    width: 90%;
   }
 
   .form-div form {

@@ -55,20 +55,22 @@ function Sidebar() {
           Employee<i>Manager</i>
         </div>
       </div>
-      <SidebarLinks>
-        <RiDashboardLine className="icon" />
-        <p className="text">Dashboard</p>
-      </SidebarLinks>
-      <SidebarLinks>
-        <IoPersonOutline className="icon" />
-        <p className="text">Employees</p>
-      </SidebarLinks>
-      <SidebarLinks className="logout icon">
-        <CiLogout className="icon" onClick={logout} />
-        <p className="text" onClick={logout}>
-          Logout
-        </p>
-      </SidebarLinks>
+      <div className="links">
+        <SidebarLinks>
+          <RiDashboardLine className="icon" />
+          <p className="text">Dashboard</p>
+        </SidebarLinks>
+        <SidebarLinks>
+          <IoPersonOutline className="icon" />
+          <p className="text">Employees</p>
+        </SidebarLinks>
+        <SidebarLinks className="logout icon">
+          <CiLogout className="icon" onClick={logout} />
+          <p className="text" onClick={logout}>
+            Logout
+          </p>
+        </SidebarLinks>
+      </div>
     </div>
   );
 }

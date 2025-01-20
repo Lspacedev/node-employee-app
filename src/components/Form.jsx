@@ -15,6 +15,7 @@ function Form({ toggleClicked }) {
     edit: false,
   });
   const [csrf, setCsrf] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigate();
 
   useEffect(() => {
@@ -49,7 +50,22 @@ function Form({ toggleClicked }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (
+      obj.name === "" ||
+      obj.surname === "" ||
+      obj.id === "" ||
+      obj.email === "" ||
+      obj.department === "" ||
+      obj.position === "" ||
+      obj.phone === "" ||
+      obj.pic === ""
+    ) {
+      alert("Fields are required");
+      setLoading(false);
 
+      return;
+    }
+    //  setLoading(true);
     const formData = new FormData();
     formData.append("name", obj.name);
     formData.append("surname", obj.surname);
@@ -82,6 +98,8 @@ function Form({ toggleClicked }) {
       // Handle error
       alert(error.message);
     }
+    setLoading(false);
+
     toggleClicked();
     navigation(0);
   }
@@ -106,6 +124,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="fname"
                 name="name"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.name}
               />
@@ -116,6 +135,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="lname"
                 name="surname"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.surname}
               />
@@ -128,6 +148,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="id-number"
                 name="id"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.id}
               />
@@ -152,6 +173,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="department"
                 name="department"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.department}
               />
@@ -162,6 +184,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="position"
                 name="position"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.position}
               />
@@ -175,6 +198,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="phone-number"
                 name="phone"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.phone}
               />
@@ -203,11 +227,12 @@ function Form({ toggleClicked }) {
             </label>
           </div>
           <br />
-          <input
-            type="submit"
-            value="Submit"
-            onClick={(e) => handleSubmit(e)}
-          ></input>
+          <button
+            className="submit-btn"
+            onClick={loading ? console.log() : (e) => handleSubmit(e)}
+          >
+            {loading ? "Loading..." : "Submit"}
+          </button>
         </form>
       </div>
     </div>
