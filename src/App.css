@@ -552,10 +552,16 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 }
-
+.Form .form-div {
+  margin: 25px 0px;
+  height: calc(90% - 50px);
+  width: 50%;
+  overflow-y: auto;
+}
 .form-div form {
-  margin: 0px;
+  margin: 0 auto 0 auto;
   padding: 25px;
   width: calc(100% - 50px);
   height: auto;
@@ -579,6 +585,12 @@ button {
 #lname,
 #fname {
 }
+
+.name-surname,
+.id-number-email,
+.department-position,
+.phone-number-date label {
+}
 .form-div form input {
   margin: 0px 0px;
   padding: 5px 0px;
@@ -590,7 +602,8 @@ button {
 }
 
 .form-div form label {
-  width: 100%;
+  width: 50%;
+
   padding: 0px;
   margin: 0px;
   color: rgb(133, 133, 133);
@@ -632,12 +645,15 @@ button {
   background-color: #094074;
   color: white;
 }
-
 .form-close {
+  display: flex;
+}
+.form-close .icon {
   text-align: end;
   font-size: 1.5rem;
   margin-right: -50px;
   cursor: pointer;
+  color: black;
 }
 .form-div form h5 {
   text-align: start;
@@ -887,6 +903,12 @@ button {
 }
 
 @media (max-width: 768px) {
+  .Form .form-div {
+    width: 70%;
+  }
+  .form-div form label {
+    width: 100%;
+  }
   .Landing {
     overflow-y: auto;
   }
@@ -959,19 +981,18 @@ button {
   .delete-update {
     gap: 80px;
   }
-  .form-div {
+  /* .form-div {
     width: 60%;
     padding: 0px;
   }
   .form-close {
-    color: white;
   }
   .form-div form {
     padding: 10px 25px;
     width: calc(100% -50px);
     height: auto;
     overflow: hidden;
-  }
+  } */
 
   .name-surname,
   .id-number-email,
@@ -996,7 +1017,8 @@ button {
     flex-direction: column-reverse;
   }
   .search-div {
-    width: 100%;
+    width: 90%;
+    margin-bottom: 5px;
   }
 
   .search-div input[type="search"] {
@@ -1025,21 +1047,35 @@ button {
     padding-left: 0px;
     justify-content: center;
   }
+  .admins {
+    text-align: center;
+  }
+  .admins ul {
+    width: 100%;
+
+    margin: 0px;
+    padding: 0px;
+  }
+  .admins ul li {
+    width: 100%;
+  }
 }
 
 @media (max-width: 480px) {
   .Nav {
     padding: 0px;
   }
-
-  .form-close {
+  .Form .form-div {
+    width: 90%;
+  }
+  /* .form-close {
     text-align: end;
     font-size: 1.5rem;
     margin-right: 0px;
   }
   .form-div {
     width: 80%;
-  }
+  } */
   .Showcase div {
     font-size: 2rem;
   }
@@ -1065,10 +1101,10 @@ button {
     margin: 15px;
   }
 
-  .form-div form input {
+  /* .form-div form input {
     float: none;
     width: 100%;
-  }
+  } */
   #date {
     padding: 4px 0px;
   }
@@ -1081,7 +1117,7 @@ button {
     overflow-y: scroll;
     flex-direction: column;
   }
-
+  /* 
   .form-div {
     overflow-y: scroll;
     width: 90%;
@@ -1091,5 +1127,6 @@ button {
     overflow-y: scroll;
     padding-top: 0px;
     padding-bottom: 10px;
-  }
+    margin: 25px 0px;
+  } */
 }

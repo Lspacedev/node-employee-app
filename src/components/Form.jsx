@@ -111,10 +111,10 @@ function Form({ toggleClicked }) {
   return (
     <div className="Form">
       <div className="form-div">
-        <div className="form-close" onClick={handleFormClose}>
-          <IoCloseOutline />
-        </div>
         <form>
+          <div className="form-close" onClick={handleFormClose}>
+            <IoCloseOutline className="icon" />
+          </div>
           <h5>Enter employee information</h5>
           <br />
           <div className="name-surname">

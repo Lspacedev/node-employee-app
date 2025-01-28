@@ -15,9 +15,9 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route exact path="/" element={<Landing />} />
-
           <Route element={<ProtectedReg />}>
+            <Route exact path="/" element={<Landing />} />
+
             <Route exact path="/login" element={<Login />} />
           </Route>
 
