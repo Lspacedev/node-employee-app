@@ -10,7 +10,6 @@ function DisplayEmployees() {
   const [employees, setEmployees] = useState([]);
   const [err, setErr] = useState("");
   const [data, setData] = useState("");
-  const navigation = useNavigate();
 
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
@@ -39,26 +38,7 @@ function DisplayEmployees() {
   useEffect(() => {
     fetchEmployees();
   }, [data]);
-  useEffect(() => {
-    getCsrf();
-  }, []);
-  async function getCsrf() {
-    try {
-      const response = await fetch(`${process.env.PROD_URL}/`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      let data = await response.json();
-
-      setCsrf(data.csrfToken);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  useEffect(() => {}, []);
 
   async function fetchEmployees() {
     try {
@@ -68,12 +48,10 @@ function DisplayEmployees() {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "CSRF-Token": csrf,
         },
       });
 
       if (response.redirected === true) {
-        navigation("/");
         localStorage.clear();
         return;
       }
@@ -163,9 +141,6 @@ function DisplayEmployees() {
           {
             method: "DELETE",
             credentials: "include",
-            headers: {
-              "CSRF-Token": csrf,
-            },
           }
         );
 
@@ -218,9 +193,7 @@ function DisplayEmployees() {
             {
               method: "PUT",
               credentials: "include",
-              headers: {
-                "CSRF-Token": csrf,
-              },
+
               body: formData,
             }
           );

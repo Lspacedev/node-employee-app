@@ -18,26 +18,6 @@ function Form({ toggleClicked }) {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigate();
 
-  useEffect(() => {
-    getCsrf();
-  }, []);
-  async function getCsrf() {
-    try {
-      const response = await fetch(`${process.env.PROD_URL}/`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
-      let data = await response.json();
-
-      setCsrf(data.csrfToken);
-    } catch (err) {
-      console.log(err);
-    }
-  }
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -81,9 +61,7 @@ function Form({ toggleClicked }) {
       const response = await fetch(`${process.env.PROD_URL}/employees`, {
         method: "POST",
         credentials: "include",
-        headers: {
-          "CSRF-Token": csrf,
-        },
+
         body: formData,
       });
 
