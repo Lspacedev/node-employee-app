@@ -7,7 +7,6 @@ import ProtectedReg from "./components/ProtectedReg";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Admin from "./components/Admin";
-// import Register from "./components/Register";
 import Landing from "./components/Landing";
 
 function App() {
