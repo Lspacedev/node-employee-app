@@ -57,11 +57,6 @@ URL="Localhost server url"
 npm run dev
 ```
 
-## Screenshot
-
-![landing](public/images/screenshot.png)
-![dashboard](public/images/screenshot2.png)
-
 ## Features
 
 Users
