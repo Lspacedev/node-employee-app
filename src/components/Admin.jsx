@@ -63,6 +63,7 @@ function Admin() {
       if (response.ok) {
         const data = await response.json();
         alert(data.message);
+        navigation(0);
       } else {
         // Handle error
       }

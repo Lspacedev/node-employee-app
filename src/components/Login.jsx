@@ -67,6 +67,7 @@ function AdminLogin() {
               type="email"
               id="email"
               name="email"
+              placeholder="admin@admin.com"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
@@ -78,6 +79,7 @@ function AdminLogin() {
               type="password"
               id="password"
               name="password"
+              placeholder="adminadmin"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>

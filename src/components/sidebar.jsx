@@ -29,7 +29,6 @@ function Sidebar() {
   return (
     <div className="Sidebar">
       <div className="logo">
-        {" "}
         <img src="./images/icon.png" />
         <div>
           Employee<i>Manager</i>
