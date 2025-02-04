@@ -21,14 +21,14 @@ function Employee({
   handleResubmit,
 }) {
   const [obj, setObj] = useState({
-    id: "",
-    name: "",
-    surname: "",
-    position: "",
-    department: "",
-    email: "",
-    phone: "",
-    date: "",
+    id: id,
+    name: name,
+    surname: surname,
+    position: position,
+    department: department,
+    email: email,
+    phone: phone,
+    date: date,
     pic: "",
     edit: false,
   });
@@ -73,6 +73,7 @@ function Employee({
                 name="name"
                 placeholder="Name"
                 onChange={(e) => handleChange(e)}
+                value={obj.name}
               />
             </label>
           </div>
@@ -84,6 +85,7 @@ function Employee({
                 name="surname"
                 placeholder="Surname"
                 onChange={(e) => handleChange(e)}
+                value={obj.surname}
               />
             </label>
           </div>
@@ -95,6 +97,7 @@ function Employee({
                 name="id"
                 placeholder=" ID Number"
                 onChange={(e) => handleChange(e)}
+                value={obj.id}
               />
             </label>
           </div>
@@ -106,6 +109,7 @@ function Employee({
                 name="position"
                 placeholder="Position"
                 onChange={(e) => handleChange(e)}
+                value={obj.position}
               />
             </label>
           </div>
@@ -117,6 +121,7 @@ function Employee({
                 name="department"
                 placeholder="Department"
                 onChange={(e) => handleChange(e)}
+                value={obj.department}
               />
             </label>
           </div>
@@ -128,6 +133,7 @@ function Employee({
                 name="email"
                 placeholder="Email"
                 onChange={(e) => handleChange(e)}
+                value={obj.email}
               />
             </label>
           </div>
@@ -139,6 +145,7 @@ function Employee({
                 name="phone"
                 placeholder="Phone number"
                 onChange={(e) => handleChange(e)}
+                value={obj.phone}
               />
             </label>
           </div>
@@ -149,6 +156,7 @@ function Employee({
               name="date"
               placeholder="Date"
               onChange={(e) => handleChange(e)}
+              value={obj.date}
             />
             <div className="profile-pic2">
               <label htmlFor="profile-pic2">

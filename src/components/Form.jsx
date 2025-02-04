@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Image } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { IoCloseOutline } from "react-icons/io5";
 
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -15,6 +17,8 @@ function Form({ toggleClicked }) {
     date: "",
     edit: false,
   });
+  const navigation = useNavigate();
+
   function handleChange(e) {
     e.preventDefault();
     const { name, value } = e.target;
@@ -60,6 +64,7 @@ function Form({ toggleClicked }) {
       alert(error.message);
     }
     toggleClicked();
+    navigation(0);
   }
 
   function handleFormClose() {
@@ -73,6 +78,9 @@ function Form({ toggleClicked }) {
           x
         </div>
         <form>
+          <div className="form-close" onClick={handleFormClose}>
+            <IoCloseOutline className="icon" />
+          </div>
           <h5>Enter employee information</h5>
           <br />
           <div className="name-surname">
@@ -82,6 +90,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="fname"
                 name="name"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.name}
               />
@@ -92,6 +101,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="lname"
                 name="surname"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.surname}
               />
@@ -104,6 +114,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="id-number"
                 name="id"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.id}
               />
@@ -128,6 +139,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="department"
                 name="department"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.department}
               />
@@ -138,6 +150,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="position"
                 name="position"
+                maxLength="25"
                 onChange={(e) => handleChange(e)}
                 value={obj.position}
               />
@@ -151,6 +164,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="phone-number"
                 name="phone"
+                maxLength="10"
                 onChange={(e) => handleChange(e)}
                 value={obj.phone}
               />

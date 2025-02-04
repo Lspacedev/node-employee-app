@@ -147,6 +147,7 @@ function DisplayEmployees() {
         } else {
           // Handle error
         }
+        navigation(0);
       } catch (error) {
         // Handle error
         setErr(error.message);
@@ -202,6 +203,7 @@ function DisplayEmployees() {
           } else {
             // Handle error
           }
+          navigation(0);
         } catch (error) {
           // Handle error
           setErr(error.message);
