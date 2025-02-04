@@ -4,7 +4,7 @@ React employee management app using firebase as storage and database. Admins can
 
 ### Employee App | Backend
 
-[https://github.com/Lspacedev/node-employee-app-backend](https://github.com/Lspacedev/node-employee-app-backend)
+[https://github.com/Lspacedev/node-employee-app-backend/tree/part_one](https://github.com/Lspacedev/node-employee-app-backend/tree/part_one)
 
 ## Prerequisites
 
