@@ -41,9 +41,8 @@ VITE_STORAGE_BUCKET="Firebase Storage Bucket"
 VITE_MESSAGING_SENDER_ID="Firebase Messaging Sender Id"
 VITE_APP_ID="Firebase App Id"
 VITE_MEASUREMENT_ID="Firebase Measurement Id"
-PROD_URL="Deployed backend url or localhost"
-VITE_GUEST_EMAIL="Guest email"
-VITE_GUEST_PASSWORD="Guest password"
+URL="Localhost server url"
+
 ```
 
 5. Run the project

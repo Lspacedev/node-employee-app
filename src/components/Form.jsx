@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { IoCloseOutline } from "react-icons/io5";
 function Form({ toggleClicked }) {
   const [obj, setObj] = useState({
@@ -14,9 +13,7 @@ function Form({ toggleClicked }) {
     date: "",
     edit: false,
   });
-  const [csrf, setCsrf] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigate();
 
   function handleChange(e) {
     e.preventDefault();
@@ -58,10 +55,8 @@ function Form({ toggleClicked }) {
     formData.append("pic", obj.pic);
 
     try {
-      const response = await fetch(`${process.env.PROD_URL}/employees`, {
+      const response = await fetch(`http://localhost:8000/employees`, {
         method: "POST",
-        credentials: "include",
-
         body: formData,
       });
 
@@ -79,7 +74,6 @@ function Form({ toggleClicked }) {
     setLoading(false);
 
     toggleClicked();
-    navigation(0);
   }
 
   function handleFormClose() {
@@ -176,7 +170,7 @@ function Form({ toggleClicked }) {
                 type="text"
                 id="phone-number"
                 name="phone"
-                maxLength="25"
+                maxLength="10"
                 onChange={(e) => handleChange(e)}
                 value={obj.phone}
               />

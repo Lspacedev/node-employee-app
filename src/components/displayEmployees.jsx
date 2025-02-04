@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import Employee from "./employee";
 import useLocalStorage from "./useLocalStorage";
 import AddEmployee from "./addEmployee";
-import ProfileIcon from "./profileIcon";
 import SeachBar from "./searchBar";
-import { useNavigate } from "react-router-dom";
 
 function DisplayEmployees() {
   const [employees, setEmployees] = useState([]);
@@ -33,7 +31,6 @@ function DisplayEmployees() {
   );
 
   const [searchResults, setSearchResults] = useState([]);
-  const [csrf, setCsrf] = useState("");
 
   useEffect(() => {
     fetchEmployees();
@@ -42,9 +39,8 @@ function DisplayEmployees() {
 
   async function fetchEmployees() {
     try {
-      const response = await fetch(`${process.env.PROD_URL}/employees`, {
+      const response = await fetch(`http://localhost:8000/employees`, {
         method: "GET",
-        credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -136,19 +132,16 @@ function DisplayEmployees() {
     );
     if (deleteConfirmation) {
       try {
-        const response = await fetch(
-          `${process.env.PROD_URL}/employees/${id}`,
-          {
-            method: "DELETE",
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`http://localhost:8000/employees/${id}`, {
+          method: "DELETE",
+        });
 
         if (response.ok) {
           const data = await response.json();
           setData(data);
 
           alert(data.message);
+          fetchEmployees();
         } else {
           // Handle error
         }
@@ -189,11 +182,9 @@ function DisplayEmployees() {
 
         try {
           const response = await fetch(
-            `${process.env.PROD_URL}/employees/${id}`,
+            `http://localhost:8000/employees/${id}`,
             {
               method: "PUT",
-              credentials: "include",
-
               body: formData,
             }
           );
@@ -202,10 +193,10 @@ function DisplayEmployees() {
             const data = await response.json();
             setData(data);
             alert(data.message);
+            fetchEmployees();
           } else {
             // Handle error
           }
-          navigation(0);
         } catch (error) {
           // Handle error
           setErr(error.message);
@@ -247,8 +238,6 @@ function DisplayEmployees() {
             handleSearchSubmit={handleSearchSubmit}
             searchInput={searchInput}
           />
-
-          <ProfileIcon />
         </div>
         <div className="count-add">
           <div className="employee-count">
