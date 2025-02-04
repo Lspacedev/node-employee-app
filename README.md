@@ -1,8 +1,8 @@
-# React + Firebase Employee App | Frontend
+# React + Firebase Employee App | Frontend - Part One
 
 React employee management app using firebase as storage and database. Admins can add and manage employees.
 
-### Employee App | Backend
+### Employee App | Backend - Part One
 
 [https://github.com/Lspacedev/node-employee-app-backend/tree/part_one](https://github.com/Lspacedev/node-employee-app-backend/tree/part_one)
 
@@ -25,13 +25,19 @@ https://github.com/Lspacedev/node-employee-app
 cd node-employee-app-backend
 ```
 
-3.  Install all dependencies
+3. Navigate to the git branch
+
+```bash
+git checkout part_one
+```
+
+4.  Install all dependencies
 
 ```bash
 npm install
 ```
 
-4. Create an env file and add the following:
+5. Create an env file and add the following:
 
 ```bash
 VITE_API_KY="Firebase Api key"
@@ -45,7 +51,7 @@ URL="Localhost server url"
 
 ```
 
-5. Run the project
+6. Run the project
 
 ```bash
 npm run dev
